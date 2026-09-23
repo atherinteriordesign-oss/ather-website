@@ -422,6 +422,14 @@ header.scrolled{
 </script>
 
 <meta name="google-site-verification" content="KzeCAlbJ8TQ6fDQDZXIinyvrQhKuLv6AXu85di0UmBE">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V9JC1LL3BR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-V9JC1LL3BR');
+</script>
 </head>
 <body><div class="site-loader" id="siteLoader"><img src="./ather-logo-full-transparent.png" alt="ATHER"><span>FROM VISION TO REALITY</span></div>
 <header id="header"><div class="container nav"><a class="brand" href="#home" aria-label="ATHER Home"><img class="brand-logo" src="./ather-logo-full-transparent.png" alt="ATHER — Finishing • Design • Execution"></a><nav class="navlinks"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#process">Our Process</a><a href="#contact">Contact</a></nav><div class="navright"><div class="lang"><b>EN</b> / AR</div><a class="btn gold" href="#contact">REQUEST A QUOTE</a><button class="menu" id="menu" aria-label="Open menu"><i></i><i></i><i></i></button></div></div><div class="mobile-nav" id="mobileNav"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#process">Our Process</a><a href="#contact">Contact</a></div></header>
@@ -556,6 +564,58 @@ window.addEventListener('scroll',()=>{
     }
   });
 },{passive:true});
+
+
+// ATHer GA4 interaction tracking
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a');
+  if (!link || typeof gtag !== 'function') return;
+
+  const href = link.href || '';
+  const text = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+
+  if (href.includes('wa.me')) {
+    gtag('event', 'whatsapp_click', {
+      link_url: href,
+      link_text: text
+    });
+  } else if (href.startsWith('tel:')) {
+    gtag('event', 'phone_click', {
+      link_url: href,
+      link_text: text
+    });
+  } else if (href.includes('instagram.com')) {
+    gtag('event', 'social_click', { platform: 'instagram', link_url: href });
+  } else if (href.includes('facebook.com')) {
+    gtag('event', 'social_click', { platform: 'facebook', link_url: href });
+  } else if (href.includes('tiktok.com')) {
+    gtag('event', 'social_click', { platform: 'tiktok', link_url: href });
+  } else if (href.includes('linkedin.com')) {
+    gtag('event', 'social_click', { platform: 'linkedin', link_url: href });
+  }
+});
+
+// Project opens
+document.querySelectorAll('.project').forEach((project) => {
+  project.addEventListener('click', () => {
+    if (typeof gtag !== 'function') return;
+    const title = project.querySelector('h3')?.textContent?.trim() || 'Unknown project';
+    const category = project.dataset.category || 'unknown';
+    gtag('event', 'project_open', {
+      project_name: title,
+      project_category: category
+    });
+  });
+});
+
+// Important CTA clicks
+document.querySelectorAll('.btn, .link').forEach((el) => {
+  el.addEventListener('click', () => {
+    if (typeof gtag !== 'function') return;
+    const label = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+    gtag('event', 'cta_click', { cta_label: label });
+  });
+});
 
 </script>
 </body>

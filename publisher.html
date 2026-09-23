@@ -34,6 +34,11 @@ a{text-decoration:none;color:inherit}
 h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:600;line-height:.96;margin:0}
 h1{font-size:clamp(3.2rem,6vw,6.3rem);max-width:980px}
 .hero p{max-width:850px;color:rgba(244,241,235,.68);font-size:1rem;line-height:1.7;margin:20px 0 0}
+.plan{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 24px}
+.plan-item{position:relative;border:1px solid rgba(244,241,235,.1);background:rgba(33,26,20,.72);padding:18px 16px;min-height:112px}
+.plan-item b{display:block;color:var(--champ);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.plan-item strong{display:block;font-size:.76rem;margin-bottom:6px}
+.plan-item span{display:block;color:rgba(244,241,235,.5);font-size:.66rem;line-height:1.5}
 .layout{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;padding-bottom:60px}
 .panel{border:1px solid var(--line);background:rgba(48,40,33,.72);box-shadow:0 22px 70px rgba(0,0,0,.2)}
 .panel-head{padding:24px 26px 10px}
@@ -77,14 +82,14 @@ textarea{resize:vertical;min-height:142px}
 footer{padding:0 0 32px;color:rgba(244,241,235,.38);font-size:.62rem;text-align:center}
 .toast{position:fixed;right:18px;bottom:18px;z-index:10;padding:12px 14px;background:var(--paper);color:var(--charcoal);font-size:.68rem;font-weight:700;box-shadow:0 14px 30px rgba(0,0,0,.25);opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s}
 .toast.show{opacity:1;transform:none}
-@media (max-width:900px){.layout{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+@media (max-width:900px){.layout{grid-template-columns:1fr}.row{grid-template-columns:1fr}.plan{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){
   .container{width:min(calc(100% - 24px),var(--max))}
   .topbar-inner{min-height:70px}.brand-mark{width:48px;height:48px}
   .buffer-link{padding:9px 11px;font-size:.58rem}
   .hero{padding:34px 0 24px}.hero p{font-size:.9rem}
   .panel-head,.panel-body{padding-left:16px;padding-right:16px}
-  .channels{grid-template-columns:1fr 1fr}
+  .channels{grid-template-columns:1fr 1fr}.plan{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -109,7 +114,14 @@ footer{padding:0 0 32px;color:rgba(244,241,235,.38);font-size:.62rem;text-align:
     <p>This workspace creates platform-ready versions for Instagram, Facebook, TikTok and LinkedIn. It keeps the website itself free of social API secrets; final publishing is handled by your connected publishing account.</p>
   </section>
 
-  <section class="layout">
+  <section class="plan" aria-label="Recommended publishing order">
+  <div class="plan-item"><b>01 · Website</b><strong>Journal first</strong><span>Keep the full project story and link on the ATHER website.</span></div>
+  <div class="plan-item"><b>02 · Instagram + Facebook</b><strong>Launch the visual</strong><span>Use the strongest image/video, caption and CTA.</span></div>
+  <div class="plan-item"><b>03 · TikTok</b><strong>Short-form cut</strong><span>Turn the same project into a vertical video / reveal.</span></div>
+  <div class="plan-item"><b>04 · LinkedIn</b><strong>Professional story</strong><span>Focus on process, scope, materials and project value.</span></div>
+</section>
+
+<section class="layout">
     <div class="panel">
       <div class="panel-head">
         <h2>Campaign</h2>
@@ -145,10 +157,10 @@ footer{padding:0 0 32px;color:rgba(244,241,235,.38);font-size:.62rem;text-align:
         <div class="field">
           <label>Channels</label>
           <div class="channels">
-            <div class="channel"><input id="instagram" type="checkbox" checked><label for="instagram"><span>Instagram</span><span>Visual</span></label></div>
-            <div class="channel"><input id="facebook" type="checkbox" checked><label for="facebook"><span>Facebook</span><span>Community</span></label></div>
-            <div class="channel"><input id="tiktok" type="checkbox" checked><label for="tiktok"><span>TikTok</span><span>Short-form</span></label></div>
-            <div class="channel"><input id="linkedin" type="checkbox" checked><label for="linkedin"><span>LinkedIn</span><span>Professional</span></label></div>
+            <div class="channel"><input id="instagram" type="checkbox" checked><label for="instagram"><span>01 · Instagram</span><span>Launch</span></label></div>
+            <div class="channel"><input id="facebook" type="checkbox" checked><label for="facebook"><span>02 · Facebook</span><span>Launch</span></label></div>
+            <div class="channel"><input id="tiktok" type="checkbox" checked><label for="tiktok"><span>03 · TikTok</span><span>Video</span></label></div>
+            <div class="channel"><input id="linkedin" type="checkbox" checked><label for="linkedin"><span>04 · LinkedIn</span><span>Story</span></label></div>
           </div>
         </div>
         <div class="actions">
@@ -156,7 +168,7 @@ footer{padding:0 0 32px;color:rgba(244,241,235,.38);font-size:.62rem;text-align:
           <button class="btn secondary" id="save">Save draft</button>
           <button class="btn secondary" id="clear">Clear</button>
         </div>
-        <div class="status">Security note: this page never asks for or stores a Buffer API key, Facebook token, Instagram token, TikTok token, or LinkedIn token. Automatic publishing needs those connections inside the publishing service.</div>
+        <div class="status"><strong>Execution status:</strong> the campaign builder is live now. The only external step is the final publish/schedule action inside Buffer, because GitHub Pages cannot safely hold private social/API credentials.</div>
       </div>
     </div>
 
@@ -173,7 +185,7 @@ footer{padding:0 0 32px;color:rgba(244,241,235,.38);font-size:.62rem;text-align:
           <button class="btn primary" id="copyAll">Copy all</button>
           <a class="btn secondary" href="https://publish.buffer.com/" target="_blank" rel="noopener">Open Buffer Publish ↗</a>
         </div>
-        <div class="note">Buffer currently supports publishing to Facebook Pages, Instagram business/creator accounts, LinkedIn Pages/profiles and TikTok accounts. Availability can depend on the account/channel type and plan.</div>
+        <div class="note"><strong>Current workflow:</strong> 1) create/update the Journal post on the main site → 2) generate this campaign pack → 3) copy/prepare the platform versions → 4) open Buffer → 5) publish or schedule across the connected channels.</div>
       </div>
     </div>
   </section>

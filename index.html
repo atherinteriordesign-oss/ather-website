@@ -348,6 +348,49 @@ header.scrolled{
   .studio-image-label{left:26px;right:14px;bottom:19px}
 }
 
+
+/* --- Design Studio Cinematic Scroll Animation --- */
+.design-studio-editorial .studio-copy,
+.design-studio-editorial .studio-visual{opacity:0;transform:translateY(26px);transition:opacity .9s var(--motion-ease),transform 1s var(--motion-ease);transition-delay:0ms}
+.design-studio-editorial.studio-motion .studio-copy{opacity:1;transform:none}
+.design-studio-editorial.studio-motion .studio-visual{opacity:1;transform:none;transition-delay:.18s}
+
+.design-studio-editorial .studio-kicker{opacity:0;transform:translateX(-18px);transition:opacity .55s var(--motion-ease),transform .65s var(--motion-ease)}
+.design-studio-editorial.studio-motion .studio-kicker{opacity:1;transform:none}
+
+.design-studio-editorial .studio-copy h2{opacity:0;transform:translateY(18px);clip-path:inset(0 0 100% 0);transition:opacity .8s var(--motion-ease),transform .9s var(--motion-ease),clip-path 1s var(--motion-ease);transition-delay:.12s}
+.design-studio-editorial.studio-motion .studio-copy h2{opacity:1;transform:none;clip-path:inset(0 0 0 0)}
+
+.design-studio-editorial .studio-description{opacity:0;transform:translateY(15px);transition:opacity .7s var(--motion-ease),transform .7s var(--motion-ease);transition-delay:.28s}
+.design-studio-editorial.studio-motion .studio-description{opacity:1;transform:none}
+
+.design-studio-editorial .studio-process{opacity:0;transform:translateY(16px);transition:opacity .75s var(--motion-ease),transform .75s var(--motion-ease);transition-delay:.42s}
+.design-studio-editorial.studio-motion .studio-process{opacity:1;transform:none}
+
+.design-studio-editorial .studio-process>div{opacity:0;transform:translateY(12px) scale(.96);transition:opacity .55s var(--motion-ease),transform .55s var(--motion-ease)}
+.design-studio-editorial.studio-motion .studio-process>div:nth-child(1){opacity:1;transform:none;transition-delay:.48s}
+.design-studio-editorial.studio-motion .studio-process>div:nth-child(3){opacity:1;transform:none;transition-delay:.66s}
+.design-studio-editorial.studio-motion .studio-process>div:nth-child(5){opacity:1;transform:none;transition-delay:.84s}
+
+.design-studio-editorial .studio-process>i{transform:scaleX(0);transform-origin:left center;transition:transform .65s var(--motion-ease)}
+.design-studio-editorial.studio-motion .studio-process>i:nth-child(2){transform:scaleX(1);transition-delay:.60s}
+.design-studio-editorial.studio-motion .studio-process>i:nth-child(4){transform:scaleX(1);transition-delay:.78s}
+
+.design-studio-editorial .studio-frame{transform:translateY(34px) scale(.985);opacity:0;transition:opacity .9s var(--motion-ease),transform 1.15s var(--motion-ease)}
+.design-studio-editorial.studio-motion .studio-frame{transform:none;opacity:1}
+
+.design-studio-editorial .studio-frame img{transform:scale(1.07);transition:transform 1.8s cubic-bezier(.16,1,.3,1),filter 1.4s ease}
+.design-studio-editorial.studio-motion .studio-frame img{transform:scale(1)}
+.design-studio-editorial .studio-image-label{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s var(--motion-ease)}
+.design-studio-editorial.studio-motion .studio-image-label{opacity:1;transform:none;transition-delay:1s}
+
+/* subtle depth while the section is in view */
+.design-studio-editorial .studio-frame{will-change:transform}
+@media (prefers-reduced-motion: reduce){
+  .design-studio-editorial *,
+  .design-studio-editorial{transition:none!important;animation:none!important}
+}
+
 </style>
 </head>
 <body><div class="site-loader" id="siteLoader"><img src="./ather-logo-full-transparent.png" alt="ATHER"><span>FROM VISION TO REALITY</span></div>
@@ -424,6 +467,35 @@ document.querySelectorAll('.project').forEach(p=>p.addEventListener('click',()=>
 document.querySelectorAll('[data-close]').forEach(x=>x.addEventListener('click',()=>{modal.classList.remove('open');document.body.classList.remove('lock')}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){modal.classList.remove('open');mobileNav.classList.remove('open');document.body.classList.remove('lock')}});
 const reveal=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');reveal.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -6% 0px'});document.querySelectorAll('.reveal').forEach((x,i)=>{if(!x.style.getPropertyValue('--delay'))x.style.setProperty('--delay',Math.min(i%6,5)*55+'ms');reveal.observe(x)});
+
+
+/* Design Studio cinematic entrance */
+const studioSection=document.querySelector('.design-studio-editorial');
+if(studioSection){
+  const studioObserver=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        studioSection.classList.add('studio-motion');
+        studioObserver.unobserve(studioSection);
+      }
+    });
+  },{threshold:.22});
+  studioObserver.observe(studioSection);
+
+  let studioTick=false;
+  window.addEventListener('scroll',()=>{
+    if(studioTick) return;
+    studioTick=true;
+    requestAnimationFrame(()=>{
+      const rect=studioSection.getBoundingClientRect();
+      const progress=Math.max(0,Math.min(1,(window.innerHeight-rect.top)/(window.innerHeight+rect.height)));
+      const shift=(progress-.5)*10;
+      const frame=studioSection.querySelector('.studio-frame');
+      if(frame) frame.style.setProperty('--studio-depth',shift.toFixed(2)+'px');
+      studioTick=false;
+    });
+  },{passive:true});
+}
 
 /* Enhanced scroll motion */
 const motionEls = document.querySelectorAll('.sectionhead h2, .card h3, .feature h3, .step h3, .sector h3, .contact-detail, .social-card');

@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="description" content="ATHER Social Publishing Center — prepare and publish one campaign across your connected channels.">
+<title>ATHER — Social Publishing Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --charcoal:#1e1913;--brown:#302821;--wood:#4b4035;--bronze:#6a5b4d;
+  --gold:#a98f73;--champ:#d7bd9b;--paper:#f4f1eb;--ink:#241f19;
+  --muted:#817970;--line:rgba(169,143,115,.2);--max:1280px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Manrope,sans-serif;background:linear-gradient(135deg,#19140f,#2a231c 54%,#17120e);color:var(--paper);min-height:100vh}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.container{width:min(calc(100% - 40px),var(--max));margin:auto}
+.topbar{border-bottom:1px solid rgba(255,255,255,.09);background:rgba(20,16,12,.72);backdrop-filter:blur(18px);position:sticky;top:0;z-index:5}
+.topbar-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mark{width:58px;height:58px;object-fit:contain}
+.brand-copy small{display:block;color:var(--gold);font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.brand-copy strong{display:block;font-family:"Cormorant Garamond",serif;font-size:1.7rem;letter-spacing:.06em}
+.buffer-link{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid rgba(215,189,155,.28);color:var(--champ);font-size:.67rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;transition:.2s}
+.buffer-link:hover{border-color:var(--champ);transform:translateY(-1px)}
+.hero{padding:54px 0 34px}
+.eyebrow{margin:0 0 12px;color:var(--gold);font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:600;line-height:.96;margin:0}
+h1{font-size:clamp(3.2rem,6vw,6.3rem);max-width:980px}
+.hero p{max-width:850px;color:rgba(244,241,235,.68);font-size:1rem;line-height:1.7;margin:20px 0 0}
+.layout{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;padding-bottom:60px}
+.panel{border:1px solid var(--line);background:rgba(48,40,33,.72);box-shadow:0 22px 70px rgba(0,0,0,.2)}
+.panel-head{padding:24px 26px 10px}
+.panel-head h2{font-size:2.4rem}
+.panel-head p{color:rgba(244,241,235,.56);font-size:.78rem;margin:10px 0 0}
+.panel-body{padding:18px 26px 26px}
+.field{margin:0 0 17px}
+label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--champ);margin-bottom:8px}
+input,textarea{
+  width:100%;border:1px solid rgba(244,241,235,.12);background:#211a14;color:var(--paper);
+  padding:12px 13px;outline:none;transition:border-color .2s,box-shadow .2s
+}
+input:focus,textarea:focus{border-color:rgba(215,189,155,.65);box-shadow:0 0 0 3px rgba(215,189,155,.06)}
+textarea{resize:vertical;min-height:142px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.channels{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:8px}
+.channel{position:relative}
+.channel input{position:absolute;opacity:0;pointer-events:none}
+.channel label{
+  cursor:pointer;margin:0;display:flex;justify-content:space-between;align-items:center;
+  border:1px solid rgba(244,241,235,.12);padding:13px;background:#211a14;color:rgba(244,241,235,.74);
+  letter-spacing:.04em;text-transform:none;font-size:.74rem
+}
+.channel label span:last-child{opacity:.42;font-size:.62rem}
+.channel input:checked + label{border-color:var(--champ);color:var(--paper);background:rgba(169,143,115,.12)}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.btn{min-height:46px;border:1px solid transparent;padding:0 16px;font-size:.65rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+.primary{background:var(--gold);color:var(--charcoal)}
+.secondary{background:transparent;border-color:rgba(244,241,235,.18);color:var(--paper)}
+.secondary:hover{border-color:var(--champ);color:var(--champ)}
+.note{margin-top:13px;font-size:.68rem;color:rgba(244,241,235,.48);line-height:1.55}
+.results{display:grid;gap:12px}
+.result{border:1px solid rgba(244,241,235,.1);background:#211a14;padding:16px}
+.result-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.result-top h3{font-family:Manrope;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;margin:0;color:var(--champ)}
+.result-top .copy{background:transparent;border:1px solid rgba(244,241,235,.15);color:rgba(244,241,235,.74);padding:7px 9px;font-size:.57rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.result-top .copy:hover{border-color:var(--champ);color:var(--champ)}
+.output{white-space:pre-wrap;color:rgba(244,241,235,.82);font-size:.78rem;line-height:1.65;min-height:80px}
+.empty{padding:40px 16px;text-align:center;border:1px dashed rgba(244,241,235,.12);color:rgba(244,241,235,.45);font-size:.75rem;line-height:1.7}
+.status{padding:12px 14px;margin-top:14px;border:1px solid rgba(215,189,155,.17);background:rgba(215,189,155,.05);color:rgba(244,241,235,.64);font-size:.68rem;line-height:1.6}
+footer{padding:0 0 32px;color:rgba(244,241,235,.38);font-size:.62rem;text-align:center}
+.toast{position:fixed;right:18px;bottom:18px;z-index:10;padding:12px 14px;background:var(--paper);color:var(--charcoal);font-size:.68rem;font-weight:700;box-shadow:0 14px 30px rgba(0,0,0,.25);opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s}
+.toast.show{opacity:1;transform:none}
+@media (max-width:900px){.layout{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+@media (max-width:560px){
+  .container{width:min(calc(100% - 24px),var(--max))}
+  .topbar-inner{min-height:70px}.brand-mark{width:48px;height:48px}
+  .buffer-link{padding:9px 11px;font-size:.58rem}
+  .hero{padding:34px 0 24px}.hero p{font-size:.9rem}
+  .panel-head,.panel-body{padding-left:16px;padding-right:16px}
+  .channels{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">
+      <img class="brand-mark" src="./ather-logo-full-transparent.png" alt="ATHER">
+      <div class="brand-copy">
+        <small>ATHER Interior Design</small>
+        <strong>Social Publishing Center</strong>
+      </div>
+    </div>
+    <a class="buffer-link" href="https://publish.buffer.com/" target="_blank" rel="noopener">Open Buffer ↗</a>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <p class="eyebrow">One idea → one campaign → multiple channels</p>
+    <h1>Prepare one post for <em style="color:var(--champ);font-style:normal">ATHER</em> and publish it everywhere.</h1>
+    <p>This workspace creates platform-ready versions for Instagram, Facebook, TikTok and LinkedIn. It keeps the website itself free of social API secrets; final publishing is handled by your connected publishing account.</p>
+  </section>
+
+  <section class="layout">
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Campaign</h2>
+        <p>Write the source content once. The tool adapts it into a clean social-media pack.</p>
+      </div>
+      <div class="panel-body">
+        <div class="field">
+          <label for="title">Campaign title</label>
+          <input id="title" placeholder="e.g. New Modern Villa Project — New Cairo">
+        </div>
+        <div class="field">
+          <label for="ar">Arabic source caption</label>
+          <textarea id="ar" placeholder="اكتب الكابشن الأساسي هنا..."></textarea>
+        </div>
+        <div class="field">
+          <label for="en">English source caption</label>
+          <textarea id="en" placeholder="Write the main English caption here..."></textarea>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="url">Website / project link</label>
+            <input id="url" placeholder="https://atherinteriordesign-oss.github.io/ather-website/">
+          </div>
+          <div class="field">
+            <label for="media">Public media URL</label>
+            <input id="media" placeholder="https://.../project-image.jpg">
+          </div>
+        </div>
+        <div class="field">
+          <label for="cta">Call to action</label>
+          <input id="cta" placeholder="Request a consultation via WhatsApp">
+        </div>
+        <div class="field">
+          <label>Channels</label>
+          <div class="channels">
+            <div class="channel"><input id="instagram" type="checkbox" checked><label for="instagram"><span>Instagram</span><span>Visual</span></label></div>
+            <div class="channel"><input id="facebook" type="checkbox" checked><label for="facebook"><span>Facebook</span><span>Community</span></label></div>
+            <div class="channel"><input id="tiktok" type="checkbox" checked><label for="tiktok"><span>TikTok</span><span>Short-form</span></label></div>
+            <div class="channel"><input id="linkedin" type="checkbox" checked><label for="linkedin"><span>LinkedIn</span><span>Professional</span></label></div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="generate">Generate campaign pack</button>
+          <button class="btn secondary" id="save">Save draft</button>
+          <button class="btn secondary" id="clear">Clear</button>
+        </div>
+        <div class="status">Security note: this page never asks for or stores a Buffer API key, Facebook token, Instagram token, TikTok token, or LinkedIn token. Automatic publishing needs those connections inside the publishing service.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Ready to publish</h2>
+        <p>Copy any version or open Buffer to schedule the same campaign across connected channels.</p>
+      </div>
+      <div class="panel-body">
+        <div id="results" class="results">
+          <div class="empty">Your platform-ready captions will appear here after you generate the campaign pack.</div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="copyAll">Copy all</button>
+          <a class="btn secondary" href="https://publish.buffer.com/" target="_blank" rel="noopener">Open Buffer Publish ↗</a>
+        </div>
+        <div class="note">Buffer currently supports publishing to Facebook Pages, Instagram business/creator accounts, LinkedIn Pages/profiles and TikTok accounts. Availability can depend on the account/channel type and plan. citeturn453232search6turn453232search10</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="container">ATHER Interior Design • From Vision to Reality.</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  const ids=['title','ar','en','url','media','cta'];
+  const channelIds=['instagram','facebook','tiktok','linkedin'];
+  const results=document.getElementById('results');
+  const toast=document.getElementById('toast');
+  let generated={};
+
+  const get = id => document.getElementById(id);
+  const val = id => get(id).value.trim();
+
+  function showToast(message){
+    toast.textContent=message;toast.classList.add('show');
+    clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove('show'),1800);
+  }
+
+  function hashtags(){
+    const base=['#ATHERInteriorDesign','#InteriorDesign','#FromVisionToReality'];
+    const title=val('title').toLowerCase();
+    if(title.includes('villa')) base.push('#VillaDesign');
+    else if(title.includes('residential')||title.includes('apartment')) base.push('#ResidentialDesign');
+    else if(title.includes('office')||title.includes('administrative')) base.push('#OfficeDesign');
+    else if(title.includes('commercial')) base.push('#CommercialDesign');
+    return base.join(' ');
+  }
+
+  function build(){
+    const ar=val('ar'), en=val('en'), title=val('title'), url=val('url'), cta=val('cta'), media=val('media');
+    const source=ar || en || 'ATHER Interior Design — From Vision to Reality.';
+    const enSource=en || ar || source;
+    const tag=hashtags();
+    const result={};
+
+    if(get('instagram').checked){
+      result.Instagram = (title?title+'\n\n':'') + source + (cta?'\n\n'+cta:'') + (url?'\n\n'+url:'') + '\n\n' + tag + (media?'\n\nMedia: '+media:'');
+    }
+    if(get('facebook').checked){
+      result.Facebook = (title?title+'\n\n':'') + source + (cta?'\n\n'+cta:'') + (url?'\n\nExplore: '+url:'') + '\n\n' + tag;
+    }
+    if(get('tiktok').checked){
+      result.TikTok = (title?title+' — ':'') + enSource + (cta?' '+cta+'.':'') + (url?' '+url:'') + '\n\n' + tag + ' #TikTokDesign';
+    }
+    if(get('linkedin').checked){
+      result.LinkedIn = (title?title+'\n\n':'') + enSource + '\n\n' + (cta?cta+'\n\n':'') + (url?url+'\n\n':'') + '#ATHER #InteriorDesign #Architecture #Design';
+    }
+    generated=result;
+    render();
+    localStorage.setItem('atherPublisherDraft',JSON.stringify(readDraft()));
+  }
+
+  function render(){
+    const keys=Object.keys(generated);
+    if(!keys.length){
+      results.innerHTML='<div class="empty">Select at least one channel, then generate the campaign pack.</div>';return;
+    }
+    results.innerHTML=keys.map(k=>'<article class="result"><div class="result-top"><h3>'+k+'</h3><button class="copy" data-channel="'+k+'">Copy</button></div><div class="output">'+escapeHtml(generated[k])+'</div></article>').join('');
+    results.querySelectorAll('[data-channel]').forEach(btn=>{
+      btn.addEventListener('click',async()=>{
+        await navigator.clipboard.writeText(generated[btn.dataset.channel]||'');
+        showToast(btn.dataset.channel+' caption copied');
+      });
+    });
+  }
+
+  function readDraft(){
+    const fields={};ids.forEach(id=>fields[id]=val(id));
+    fields.channels={};channelIds.forEach(id=>fields.channels[id]=get(id).checked);
+    return fields;
+  }
+
+  function applyDraft(d){
+    if(!d)return;
+    ids.forEach(id=>{if(d[id]!=null)get(id).value=d[id]});
+    if(d.channels)channelIds.forEach(id=>{if(typeof d.channels[id]==='boolean')get(id).checked=d.channels[id]});
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+
+  document.getElementById('generate').addEventListener('click',build);
+  document.getElementById('save').addEventListener('click',()=>{
+    localStorage.setItem('atherPublisherDraft',JSON.stringify(readDraft()));showToast('Draft saved on this device');
+  });
+  document.getElementById('clear').addEventListener('click',()=>{
+    ids.forEach(id=>get(id).value='');channelIds.forEach(id=>get(id).checked=true);generated={};render();
+    localStorage.removeItem('atherPublisherDraft');showToast('Draft cleared');
+  });
+  document.getElementById('copyAll').addEventListener('click',async()=>{
+    const text=Object.entries(generated).map(([k,v])=>'### '+k+'\n'+v).join('\n\n');
+    if(!text){showToast('Generate the campaign first');return;}
+    await navigator.clipboard.writeText(text);showToast('All captions copied');
+  });
+
+  try{applyDraft(JSON.parse(localStorage.getItem('atherPublisherDraft')||'null'))}catch(e){}
+})();
+</script>
+</body>
+</html>

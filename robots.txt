@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://atherinteriordesign-oss.github.io/ather-website/sitemap.xml

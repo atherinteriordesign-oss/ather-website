@@ -393,6 +393,11 @@ header.scrolled{
 
 
 /* --- ATHER Journal --- */
+/* --- ATHER Journal 4-card layout --- */
+.journal-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1050px){.journal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.journal-grid{grid-template-columns:1fr}}
+
 .journal-editorial{background:var(--paper);position:relative;overflow:hidden}
 .journal-editorial:before{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(169,143,115,.12);border-radius:50%;right:-240px;top:30px}
 .journal-head{display:flex;justify-content:space-between;align-items:end;gap:60px;margin-bottom:48px}
@@ -564,6 +569,18 @@ header.scrolled{
           <div class="journal-meta"><span>DETAILS</span><time>ATHER JOURNAL</time></div>
           <h3>Why Lighting and Materials Change the Entire Space</h3>
           <p>How warm lighting, wood, stone, texture and contrast can transform the feel of an interior.</p>
+          <button class="journal-read">READ ARTICLE <b>↗</b></button>
+        </div>
+      </article>
+      <article class="journal-card reveal" data-post="3">
+        <div class="journal-media">
+          <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=90" alt="ATHER Interior Design luxury living space" loading="lazy">
+          <span>04</span>
+        </div>
+        <div class="journal-body">
+          <div class="journal-meta"><span>ABOUT ATHER</span><time>NEW POST</time></div>
+          <h3>More Than Just Finishing — ATHER Interior Design</h3>
+          <p>Integrated design, finishing and execution with quality, deadline commitment and attention to detail.</p>
           <button class="journal-read">READ ARTICLE <b>↗</b></button>
         </div>
       </article>

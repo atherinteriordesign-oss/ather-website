@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://atherinteriordesign-oss.github.io/ather-website/sitemap.xml
+Sitemap: https://atherinteriordesign-oss.github.io/ather-website/sitemap.txt
